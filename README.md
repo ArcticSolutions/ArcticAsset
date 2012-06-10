@@ -17,7 +17,19 @@ involves making sure your system is ready for Symfony.
 Copy and install the sourcefiles on your server that supports the Symfon2 framework. Make
 sure that the webserver points to the ``web/`` directory.
 
-### b) Check your System Configuration
+### b) Configure the app
+
+Configure your own ``parameters.ini`` file in ``app/config/``. You can use the 
+``parameters.ini.dist`` file as a starting point.
+
+### c) Install the vendors
+
+Run the following command from the root of the installation to make sure all the
+needed libraries are installed to make the application run.
+
+    php bin/vendors install
+
+### d) Check your System Configuration
 
 Before you begin using the application, make sure that your local system is properly 
 configured for Symfony. To do this, execute the following:
@@ -26,7 +38,7 @@ configured for Symfony. To do this, execute the following:
 
 If you get any warnings or recommendations, fix these now before moving on.
 
-### c) Access the Application via the Browser
+### e) Access the Application via the Browser
 
 Congratulations! You're now ready to use ArcticAsset. Just point your webbrowser to
 the url that you configured you webserver to use.
