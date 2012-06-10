@@ -1,0 +1,7 @@
+parameters:
+#    artic_asset.example.class: Artic\AssetBundle\Example
+
+services:
+#    artic_asset.example:
+#        class: %artic_asset.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
