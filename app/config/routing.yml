@@ -1,3 +1,6 @@
+ArcticAssetBundle:
+    resource: "@ArcticAssetBundle/Controller/"
+    type:     annotation
     prefix:   /
 
 # Internal routing configuration to handle ESI
