@@ -1,3 +1,0 @@
-ArticAssetBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ArticAssetBundle:Default:index }
