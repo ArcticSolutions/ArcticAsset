@@ -1,0 +1,28 @@
+<article class="module width_full">
+	<header>
+		<h3>Profile</h3>
+	</header>
+	<div class="module_content">
+		<table class="tablesorter" cellspacing="0">
+			<tbody>
+				<tr>
+					<td>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</td>
+					<td>{{ user.username }}</td>
+				</tr>
+				<tr>
+					<td>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
+					<td>{{ user.email }}</td>
+				</tr>
+				<tr>
+					<td>{{ 'profile.show.name'|trans({}, 'FOSUserBundle') }}:</td>
+					<td>{{ user.name }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer>
+		<div class="submit_link">
+			<a href="{{ path('fos_user_profile_edit') }}" class="alt_btn">{{ 'profile.show.link'|trans({}, 'FOSUserBundle') }}</a>
+		</div>
+	</footer>
+</article>

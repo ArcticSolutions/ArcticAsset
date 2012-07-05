@@ -627,6 +627,30 @@ input[type=submit].alt_btn:hover {
 color: #001217;
 }
 
+a.alt_btn {
+display: block;
+background: #D0D1D4 url(/images/btn_submit_2.png) repeat-x;
+border: 1px solid #30B0C8;
+-webkit-box-shadow: 0 1px 0 white;
+-moz-box-shadow: 0 1px 0 #fff;
+box-shadow: 0 1px 0 white;
+font-weight: bold;
+line-height: 22px;
+height: 22px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+padding: 0 10px;
+color: #003E49;
+text-shadow: 0 1px 0 #6CDCF9;
+cursor: pointer;
+}
+
+a.alt_btn:hover {
+text-decoration: none;
+color: #001217;
+}
+
 input[type=submit].btn_post_message {
 background: #D0D1D4 url(/images/post_message.png) no-repeat;
 display: block;
