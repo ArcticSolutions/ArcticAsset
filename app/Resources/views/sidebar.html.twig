@@ -1,17 +1,17 @@
 <form class="quick_search">
 	<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></form>
 <hr/>
-<h3>Content</h3>
+<h3>Assets</h3>
 <ul class="toggle">
-	<li class="icn_new_article">
-		<a href="#">New Article</a>
-	</li>
-	<li class="icn_edit_article">
-		<a href="#">Edit Articles</a>
-	</li>
 	<li class="icn_categories">
-		<a href="#">Categories</a>
+		<a href="{{ path('arctic_asset_asset_index') }}">List Assets</a>
 	</li>
+	<li class="icn_new_article">
+		<a href="{{ path('arctic_asset_asset_new_asset') }}">New Asset</a>
+	</li>
+	<!--<li class="icn_edit_article">
+		<a href="#">Edit Articles</a>
+	</li>-->
 	<li class="icn_tags">
 		<a href="#">Tags</a>
 	</li>

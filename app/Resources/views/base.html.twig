@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8"/>
-	<title>Dashboard I Admin Panel</title>
+	<title>ArcticAsset {% if title is defined %}- {{title}}{% endif %}</title>
 	{% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('css/layout.css') }}" type="text/css" media="screen" />
 	{% endblock %}
@@ -48,7 +48,7 @@
 			<h1 class="site_title">
 				<a href="index.html">ArcticAsset</a>
 			</h1>
-			<h2 class="section_title">Dashboard</h2>
+			<h2 class="section_title">{% if title is defined %}{{title}}{% endif %}</h2>
 		</hgroup>
 	</header>
 	<!-- end of header bar -->

@@ -4,10 +4,10 @@ namespace Arctic\AssetBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class AssetControllerTest extends WebTestCase
 {
     public function testIndex()
     {
-        
+    	
     }
 }
