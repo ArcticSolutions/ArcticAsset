@@ -2,11 +2,7 @@
 	<p>
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			<a href="{{ path('fos_user_profile_show') }}">
-				{% if app.user.name is defined %}
-					{{ app.user.name }}
-				{% else %}
-					{{ app.user.username }}
-				{% endif %}
+				{{ 'layout.logged_in_as'|trans({'%username%': app.user.name}, 'FOSUserBundle') }}
 			</a>
 		{% endif %}
 	</p>
