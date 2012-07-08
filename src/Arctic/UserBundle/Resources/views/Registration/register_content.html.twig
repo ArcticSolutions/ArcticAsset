@@ -1,0 +1,17 @@
+<form id="login" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+	{{ form_widget(form._token) }}
+    <h1>Register</h1>
+    <fieldset id="errors">
+    	{% if form_errors(form) %}<h4 class="alert_error">{{ form_errors(form) }}</h4>{% endif %}
+    </fieldset>
+    <fieldset id="inputs">
+        <input type="text" class="username" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" value="{{ form.username.vars.value }}" placeholder="{{ 'fos_user_registration_form_username'|trans({}, 'FOSUserBundle') }}" required maxlength="255" pattern=".{2,255}" />
+        <input type="text" class="name" id="fos_user_registration_form_name" name="fos_user_registration_form[name]" value="{{ form.name.vars.value }}" placeholder="{{ 'fos_user_registration_form_name'|trans({}, 'FOSUserBundle') }}" required maxlength="255" pattern=".{3,255}" />
+        <input type="email" class="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" value="{{ form.email.vars.value }}" placeholder="{{ 'fos_user_registration_form_email'|trans({}, 'FOSUserBundle') }}" required />
+        <input type="password" class="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" placeholder="{{ 'fos_user_registration_form_plainPassword_first'|trans({}, 'FOSUserBundle') }}" required />
+        <input type="password" class="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" placeholder="{{ 'fos_user_registration_form_plainPassword_second'|trans({}, 'FOSUserBundle') }}" required />
+    </fieldset>
+    <fieldset id="actions">
+        <input type="submit" id="submit" name="_submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    </fieldset>
+</form>

@@ -1,37 +1,43 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+<!doctype html>
+<html lang="en">
 
-{% block fos_user_content %}
-{% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
-{% endif %}
+<head>
+	<meta charset="utf-8"/>
+	<title>ArcticAsset - Log In</title>
+	{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/login.css') }}" type="text/css" media="screen" />
+	{% endblock %}
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="{{ asset('css/ie.css') }}" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	{% block javascripts %}
+	<script src="{{ asset('js/jquery-1.5.2.min.js') }}" type="text/javascript"></script>
+	{% endblock %}
+	<script type="text/javascript">
+		$(document).ready(function() {
 
-<article class="module width_full">
-	<form action="{{ path("fos_user_security_check") }}" method="post">
+		});
+    </script>
+</head>
+
+<body>
+	<form id="login" action="{{ path("fos_user_security_check") }}" method="post">
 		<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-		<header>
-			<h3>Login</h3>
-		</header>
-		<div class="module_content">
-			<fieldset>
-				<label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-    			<input type="text" id="username" name="_username" value="{{ last_username }}" />
-    		</fieldset>
-			<fieldset>
-				<label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-    			<input type="password" id="password" name="_password" />
-			</fieldset>
-			<fieldset>
-				<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    			<label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-			</fieldset>
-			<div class="clear"></div>
-		</div>
-		<footer>
-			<div class="submit_link">
-				<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
-			</div>
-		</footer>
+	    <h1>Log In</h1>
+	    <fieldset id="errors">
+	    	{% if error %}<h4 class="alert_error">{{ error|trans({}, 'FOSUserBundle') }}</h4>{% endif %}
+	    </fieldset>
+	    <fieldset id="inputs">
+	        <input class="username" name="_username" type="text" placeholder="{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}" value="{{ last_username }}" autofocus required>   
+	        <input class="password" name="_password" type="password" placeholder="{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}" required>
+	        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+			<label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+	    </fieldset>
+	    <fieldset id="actions">
+	        <input type="submit" id="submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+			<a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+	    </fieldset>
 	</form>
-</article>
-<!-- end of login arcticle -->
-{% endblock fos_user_content %}
+</body>
+</html>
