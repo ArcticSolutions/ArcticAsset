@@ -24,7 +24,7 @@ class Asset
     /**
      * @var string $serialnumber
      *
-     * @ORM\Column(name="serialnumber", type="string", length=255)
+     * @ORM\Column(name="serialnumber", type="string", length=255, unique=true)
      */
     private $serialnumber;
 
