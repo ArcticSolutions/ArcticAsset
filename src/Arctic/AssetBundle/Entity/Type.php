@@ -31,7 +31,7 @@ class Type
     /**
      * @var string $model
      *
-     * @ORM\Column(name="model", type="string", length=255)
+     * @ORM\Column(name="model", type="string", length=255, unique=true)
      */
     private $model;
 
