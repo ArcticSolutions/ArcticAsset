@@ -47,7 +47,7 @@ class ProfileFormType extends BaseType
 
     public function getName()
     {
-        return 'fos_user_profile';
+        return 'arctic_user_profile';
     }
 
     /**

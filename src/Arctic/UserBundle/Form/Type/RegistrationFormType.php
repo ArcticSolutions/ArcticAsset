@@ -47,6 +47,6 @@ class RegistrationFormType extends BaseType
 
     public function getName()
     {
-        return 'fos_user_registration';
+        return 'arctic_user_registration';
     }
 }
