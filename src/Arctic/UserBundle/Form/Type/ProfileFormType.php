@@ -12,54 +12,29 @@
 namespace Arctic\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Symfony\Component\Security\Core\Validator\Constraint\UserPassword;
+use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
 class ProfileFormType extends BaseType
 {
-    private $class;
-
-    /**
-     * @param string $class The User class name
-     */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
+        $builder->add('name');
+        
+        $this->buildUserForm($builder, $options);
 
-        $child = $builder->create('user', 'form', array('data_class' => $this->class));
-        $this->buildUserForm($child, $options);
+        $builder->add('current_password', 'password', array(
+            'label' => 'form.current_password',
+            'translation_domain' => 'FOSUserBundle',
+            'mapped' => false,
+            'constraints' => new UserPassword(),
+        ));
 
-        $builder->add($child)
-                ->add('current', 'password');
-    }
-
-    public function getDefaultOptions(array $options)
-    {
-        return array(
-            'data_class' => 'FOS\UserBundle\Form\Model\CheckPassword',
-            'intention'  => 'profile',
-        );
+        
     }
 
     public function getName()
     {
         return 'arctic_user_profile';
-    }
-
-    /**
-     * Builds the embedded form representing the user.
-     *
-     * @param FormBuilder $builder
-     * @param array       $options
-     */
-    protected function buildUserForm(FormBuilder $builder, array $options)
-    {
-        $builder->add('username')
-                ->add('email', 'email')
-                ->add('name');
     }
 }

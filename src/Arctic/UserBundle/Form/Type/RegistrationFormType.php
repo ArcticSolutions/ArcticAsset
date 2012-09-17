@@ -16,16 +16,6 @@ use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 
 class RegistrationFormType extends BaseType
 {
-    private $class;
-
-    /**
-     * @param string $class The User class name
-     */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
@@ -35,14 +25,6 @@ class RegistrationFormType extends BaseType
             ->add('email', 'email')
             ->add('name')
             ->add('plainPassword', 'repeated', array('type' => 'password'));
-    }
-
-    public function getDefaultOptions(array $options)
-    {
-        return array(
-            'data_class' => $this->class,
-            'intention'  => 'registration',
-        );
     }
 
     public function getName()
