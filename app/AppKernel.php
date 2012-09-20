@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Arctic\AssetBundle\ArcticAssetBundle(),
             new Arctic\UserBundle\ArcticUserBundle(),
+            new Arctic\CaseBundle\ArcticCaseBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

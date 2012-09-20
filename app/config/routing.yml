@@ -1,3 +1,8 @@
+arctic_case:
+    resource: "@ArcticCaseBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ArcticUserBundle:
     resource: "@ArcticUserBundle/Resources/config/routing.yml"
 
