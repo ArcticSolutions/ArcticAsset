@@ -114,4 +114,14 @@ class Owner
     {
         return $this->assets;
     }
+
+    /**
+     * Remove assets
+     *
+     * @param Arctic\AssetBundle\Entity\Asset $assets
+     */
+    public function removeAsset(\Arctic\AssetBundle\Entity\Asset $assets)
+    {
+        $this->assets->removeElement($assets);
+    }
 }
