@@ -2,12 +2,13 @@
 
 namespace Arctic\AssetBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Arctic\AssetBundle\Entity\Asset
  *
- * @ORM\Table()
+ * @ORM\Table(indexes={@ORM\Index(name="productnumber_idx", columns={"productnumber"})})
  * @ORM\Entity(repositoryClass="Arctic\AssetBundle\Entity\AssetRepository")
  */
 class Asset
@@ -20,6 +21,21 @@ class Asset
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \DateTime $created
+     *
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated", type="datetime")
+     */
+    private $updated;
 
     /**
      * @var string $serialnumber
@@ -36,6 +52,13 @@ class Asset
     private $productnumber;
 
     /**
+     * @var string $tag
+     *
+     * @ORM\Column(name="tag", type="string", length=255)
+     */
+    private $tag;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Owner", inversedBy="assets")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
@@ -46,6 +69,11 @@ class Asset
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Arctic\TicketBundle\Entity\Ticket", mappedBy="asset")
+     */
+    private $tickets;
 
 
     /**
@@ -136,5 +164,114 @@ class Asset
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Asset
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Asset
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add tickets
+     *
+     * @param Arctic\TicketBundle\Entity\Ticket $tickets
+     * @return Asset
+     */
+    public function addTicket(\Arctic\TicketBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets[] = $tickets;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tickets
+     *
+     * @param Arctic\TicketBundle\Entity\Ticket $tickets
+     */
+    public function removeTicket(\Arctic\TicketBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets->removeElement($tickets);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Set tag
+     *
+     * @param string $tag
+     * @return Asset
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+    
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return string 
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
 }

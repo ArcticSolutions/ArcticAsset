@@ -45,14 +45,7 @@ class Log
     private $statement;
 
     /**
-     * @var integer $log
-     *
-     * @ORM\Column(name="log", type="integer")
-     */
-    private $log;
-
-    /*
-     * @ORM\OneToOne(targetEntity="Ticket", inversedBy="logs")
+     * @ORM\ManyToOne(targetEntity="Ticket", inversedBy="logs")
      * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
      */
     private $ticket;
@@ -137,25 +130,25 @@ class Log
     }
 
     /**
-     * Set log
+     * Set ticket
      *
-     * @param integer $log
+     * @param Arctic\TicketBundle\Entity\Ticket $ticket
      * @return Log
      */
-    public function setLog($log)
+    public function setTicket(\Arctic\TicketBundle\Entity\Ticket $ticket = null)
     {
-        $this->log = $log;
+        $this->ticket = $ticket;
     
         return $this;
     }
 
     /**
-     * Get log
+     * Get ticket
      *
-     * @return integer 
+     * @return Arctic\TicketBundle\Entity\Ticket 
      */
-    public function getLog()
+    public function getTicket()
     {
-        return $this->log;
+        return $this->ticket;
     }
 }

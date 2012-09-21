@@ -2,7 +2,9 @@
 
 namespace Arctic\AssetBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Arctic\AssetBundle\Entity\Type
@@ -22,6 +24,21 @@ class Type
     private $id;
 
     /**
+     * @var \DateTime $created
+     *
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated", type="datetime")
+     */
+    private $updated;
+
+    /**
      * @var string $make
      *
      * @ORM\Column(name="make", type="string", length=255)
@@ -38,8 +55,12 @@ class Type
     /**
      * @ORM\OneToMany(targetEntity="Asset", mappedBy="type")
      */
-    private $assets;
+    protected $assets;
 
+    public function __construct()
+    {
+        $this->assets = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -90,10 +111,6 @@ class Type
     {
         return $this->model;
     }
-    public function __construct()
-    {
-        $this->assets = new \Doctrine\Common\Collections\ArrayCollection();
-    }
     
     /**
      * Add assets
@@ -123,5 +140,51 @@ class Type
     public function removeAsset(\Arctic\AssetBundle\Entity\Asset $assets)
     {
         $this->assets->removeElement($assets);
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Type
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Type
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

@@ -5,6 +5,7 @@ namespace Arctic\UserBundle\Entity;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * @ORM\Entity
@@ -29,9 +30,16 @@ class User extends BaseUser
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Arctic\TicketBundle\Entity\Ticket", mappedBy="user")
+     */
+    private $tickets;
+
 	public function __construct()
 	{
 		parent::__construct();
+
+        $this->tickets = new ArrayCollection();
 	}
 
 	/**
@@ -62,5 +70,38 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add tickets
+     *
+     * @param Arctic\TicketBundle\Entity\Ticket $tickets
+     * @return User
+     */
+    public function addTicket(\Arctic\TicketBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets[] = $tickets;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tickets
+     *
+     * @param Arctic\TicketBundle\Entity\Ticket $tickets
+     */
+    public function removeTicket(\Arctic\TicketBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets->removeElement($tickets);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }

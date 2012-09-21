@@ -53,20 +53,25 @@ class Ticket
     private $status;
 
     /**
-     * @var integer $assigned
-     *
-     * @ORM\Column(name="assigned", type="integer")
+     * @ORM\ManyToOne(targetEntity="Arctic\AssetBundle\Entity\Asset", inversedBy="tickets")
+     * @ORM\JoinColumn(name="asset_id", referencedColumnName="id")
      */
-    private $assigned;
+    private $asset;
 
     /**
-     * @ORM\OneToMany(targetEntity="log", mappedBy="ticket")
+     * @ORM\ManyToOne(targetEntity="Arctic\UserBundle\Entity\User", inversedBy="tickets")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="ticket")
      */
     private $logs;
 
     public function __construct()
     {
-        $this->logs = ArrayCollection();
+        $this->logs = new ArrayCollection();
     }
 
     /**
@@ -172,35 +177,35 @@ class Ticket
     }
 
     /**
-     * Set assigned
+     * Set user
      *
-     * @param integer $assigned
+     * @param Arctic\UserBundle\Entity\User $user
      * @return Ticket
      */
-    public function setAssigned($assigned)
+    public function setUser(\Arctic\UserBundle\Entity\User $user = null)
     {
-        $this->assigned = $assigned;
+        $this->user = $user;
     
         return $this;
     }
 
     /**
-     * Get assigned
+     * Get user
      *
-     * @return integer 
+     * @return Arctic\UserBundle\Entity\User 
      */
-    public function getAssigned()
+    public function getUser()
     {
-        return $this->assigned;
+        return $this->user;
     }
 
     /**
      * Add logs
      *
-     * @param Arctic\TicketBundle\Entity\log $logs
+     * @param Arctic\TicketBundle\Entity\Log $logs
      * @return Ticket
      */
-    public function addLog(\Arctic\TicketBundle\Entity\log $logs)
+    public function addLog(\Arctic\TicketBundle\Entity\Log $logs)
     {
         $this->logs[] = $logs;
     
@@ -210,9 +215,9 @@ class Ticket
     /**
      * Remove logs
      *
-     * @param Arctic\TicketBundle\Entity\log $logs
+     * @param Arctic\TicketBundle\Entity\Log $logs
      */
-    public function removeLog(\Arctic\TicketBundle\Entity\log $logs)
+    public function removeLog(\Arctic\TicketBundle\Entity\Log $logs)
     {
         $this->logs->removeElement($logs);
     }
@@ -225,5 +230,28 @@ class Ticket
     public function getLogs()
     {
         return $this->logs;
+    }
+
+    /**
+     * Set asset
+     *
+     * @param Arctic\AssetBundle\Entity\Asset $asset
+     * @return Ticket
+     */
+    public function setAsset(\Arctic\AssetBundle\Entity\Asset $asset = null)
+    {
+        $this->asset = $asset;
+    
+        return $this;
+    }
+
+    /**
+     * Get asset
+     *
+     * @return Arctic\AssetBundle\Entity\Asset 
+     */
+    public function getAsset()
+    {
+        return $this->asset;
     }
 }
