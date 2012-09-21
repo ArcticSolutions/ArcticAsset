@@ -49,3 +49,6 @@ build/config/buildinfo.properties
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
+
+# Ignore the composer.lock file
+composer.lock
