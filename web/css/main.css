@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+	background: url('../img/furley_bg.png');
+}
+
+.login {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.usercard h5 {
+	line-height: 48px;
+	margin: 0;
+}
+
+.login > .row {
+	margin-left: -20px;
+}
+
+.details {
+	padding-top: 10px;
+}
+
+.details div.tab-pane label.control-label {
+	text-align: left;
+}
+
+.details div.tab-pane div.accordion-group {
+	background-color: #ddd;
+}
+
+.details > div.tab-content input, 
+.details > div.tab-content textarea, 
+.details > div.tab-content select,
+div.newLog textarea {
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.details > div.tab-content input, 
+.details > div.tab-content select {
+	height: 30px;
+}
+
+.details ul.nav-tabs>:first-child {
+	margin-left: 10px;
+}
+
+.nav-pills.nav-pills-large > li > a {
+	padding: 15px;
+}
+
+.nav-pills.nav-pills-large > li:not(.active) > a {
+	background-color: #ddd;
+}
+
+div.caseLogs {
+	background-color: whiteSmoke;
+}
+
+div.newLog {
+	padding-bottom: 0;
+	border-top: 1px solid #ddd;
+}
+
+/* Layout styles */
+
+.noBottomMargin {
+	margin-bottom: 0;
+}
+
+.greyBorder {
+	border: 1px solid #ddd;
+}
+
+.roundedCorners {
+	border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+}
+
+.padding15px {
+	padding: 15px;
+}
+
+.whiteBackground {
+	background-color: #fff;
+}
+
+.details ul.nav-tabs li.active a {
+	background-color: whiteSmoke;
+}
+
+.whiteSmokeBackground {
+	background-color: whiteSmoke;
+}
+
+/* Helper styles */
+
+.right {
+	text-align: right !important;
+}
+
+.left {
+	text-align: left !important;
+}
+
+.center {
+	text-align: center !important;
+}

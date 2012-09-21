@@ -1,10 +1,5 @@
-<div class="user">
-	<p>
-		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-			<a href="{{ path('fos_user_profile_show') }}">
-				{{ 'layout.logged_in_as'|trans({'%username%': app.user.name}, 'FOSUserBundle') }}
-			</a>
-		{% endif %}
-	</p>
-	<a class="logout_user" href="{{ path('fos_user_security_logout') }}" title="Logout">Logout</a>
-</div>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<p class="navbar-text pull-right">
+  <a href="{{ path('fos_user_profile_show') }}" class="navbar-link">{{ 'layout.logged_in_as'|trans({'%username%': app.user.name}, 'FOSUserBundle') }}</a>
+</p>
+{% endif %}
