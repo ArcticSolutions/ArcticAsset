@@ -12,25 +12,14 @@
 namespace Arctic\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Security\Core\Validator\Constraint\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
 class ProfileFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
-        
+        $builder->add('name', null, array('label' => 'form.name', 'translation_domain' => 'FOSUserBundle'));
         $this->buildUserForm($builder, $options);
-
-        $builder->add('current_password', 'password', array(
-            'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
-            'mapped' => false,
-            'constraints' => new UserPassword(),
-        ));
-
-        
     }
 
     public function getName()

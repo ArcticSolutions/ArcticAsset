@@ -1,51 +1,8 @@
 <div class="row">
     <div class="whiteBackground greyBorder roundedCorners padding15px">
         <form class="form-horizontal" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="post">
-            {{ form_widget(form._token) }}
             <legend>Login</legend>
-            {% if form_errors(form) %}
-            <div class="alert alert-error">{{ form_errors(form) }}</div>
-            {% endif %}
-            <div class="control-group">
-                <label class="control-label" for="fos_user_registration_form_username">
-                    {{ 'fos_user_registration_form_username'|trans({}, 'FOSUserBundle') }}
-                </label>
-                <div class="controls">
-                    <input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" value="{{ form.username.vars.value }}" required maxlength="255" pattern=".{2,255}"></div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="fos_user_registration_form_name">
-                    {{ 'fos_user_registration_form_name'|trans({}, 'FOSUserBundle') }}
-                </label>
-                <div class="controls">
-                    <input type="text" id="fos_user_registration_form_name" name="fos_user_registration_form[name]" value="{{ form.name.vars.value }}" required maxlength="255" pattern=".{3,255}" ></div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="fos_user_registration_form_email">
-                    {{ 'fos_user_registration_form_email'|trans({}, 'FOSUserBundle') }}
-                </label>
-                <div class="controls">
-                    <input type="text" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" value="{{ form.email.vars.value }}" required></div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="fos_user_registration_form_plainPassword_first">
-                    {{ 'fos_user_registration_form_plainPassword_first'|trans({}, 'FOSUserBundle') }}
-                </label>
-                <div class="controls">
-                    <input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required></div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="fos_user_registration_form_plainPassword_second">
-                    {{ 'fos_user_registration_form_plainPassword_second'|trans({}, 'FOSUserBundle') }}
-                </label>
-                <div class="controls">
-                    <input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required></div>
-            </div>
-
+            {{ form_widget(form) }}
             <div class="control-group">
                 <div class="controls">
                     <button type="submit" name="_submit" class="btn btn-primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button>

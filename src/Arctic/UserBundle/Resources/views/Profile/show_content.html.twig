@@ -1,28 +1,31 @@
-<article class="module width_full">
-	<header>
+<div class="row-fluid">
+	<div class="span3">
+              <div class="well well-small whiteBackground usercard clearfix">
+                <h5>{{ user.name }}</h5>
+              </div>
+              <ul class="nav nav-tabs nav-stacked whiteBackground">
+                <li class="active"><a href="{{ path('fos_user_profile_edit') }}">Account</a></li>
+                <li><a href="{{ path('fos_user_change_password') }}">Password</a></li>
+              </ul>
+            </div>
+	<div class="span9 whiteBackground greyBorder roundedCorners padding15px">
 		<h3>Profile</h3>
-	</header>
-	<div class="module_content">
-		<table class="tablesorter" cellspacing="0">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{{ 'profile.show.name'|trans({}, 'FOSUserBundle') }}</th>
+					<th>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}</th>
+					<th>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th>
+				</tr>
+			</thead>
 			<tbody>
 				<tr>
-					<td>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</td>
-					<td>{{ user.username }}</td>
-				</tr>
-				<tr>
-					<td>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
-					<td>{{ user.email }}</td>
-				</tr>
-				<tr>
-					<td>{{ 'profile.show.name'|trans({}, 'FOSUserBundle') }}:</td>
 					<td>{{ user.name }}</td>
+					<td>{{ user.username }}</td>
+					<td>{{ user.email }}</td>
 				</tr>
 			</tbody>
 		</table>
+		<a href="{{ path('fos_user_profile_edit') }}" class="alt_btn">{{ 'profile.show.link'|trans({}, 'FOSUserBundle') }}</a>
 	</div>
-	<footer>
-		<div class="submit_link">
-			<a href="{{ path('fos_user_profile_edit') }}" class="alt_btn">{{ 'profile.show.link'|trans({}, 'FOSUserBundle') }}</a>
-		</div>
-	</footer>
-</article>
+</div>
