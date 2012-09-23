@@ -11,9 +11,9 @@ class AssetController extends Controller
 {
     /**
      * @Route("/assets")
-     * @Template("ArcticAssetBundle:Asset:index.html.twig")
+     * @Template("ArcticAssetBundle:Asset:assets.html.twig")
      */
-    public function indexAction()
+    public function assetsAction()
     {
         return array('title' => 'Assets');
     }
