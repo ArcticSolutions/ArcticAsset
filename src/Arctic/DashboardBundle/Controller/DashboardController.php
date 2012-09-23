@@ -1,18 +1,18 @@
 <?php
 
-namespace Arctic\AssetBundle\Controller;
+namespace Arctic\DashboardBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
+class DashboardController extends Controller
 {
     /**
      * @Route("/")
-     * @Template("ArcticAssetBundle:Default:index.html.twig")
+     * @Template("")
      */
-    public function indexAction()
+    public function dashboardAction()
     {
         return array('title' => 'Dashboard');
     }
