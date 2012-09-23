@@ -26,6 +26,7 @@ class Type
     /**
      * @var \DateTime $created
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
@@ -60,6 +61,11 @@ class Type
     public function __construct()
     {
         $this->assets = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s (%s)', $this->model, $this->make);
     }
 
     /**

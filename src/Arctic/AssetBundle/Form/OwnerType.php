@@ -6,28 +6,25 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AssetType extends AbstractType
+class OwnerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('serialnumber')
-            ->add('productnumber')
-            ->add('tag')
-            ->add('owner')
-            ->add('type')
+            ->add('name')
+            ->add('description')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Arctic\AssetBundle\Entity\Asset'
+            'data_class' => 'Arctic\AssetBundle\Entity\Owner'
         ));
     }
 
     public function getName()
     {
-        return 'arctic_assetbundle_assettype';
+        return 'arctic_assetbundle_ownertype';
     }
 }
