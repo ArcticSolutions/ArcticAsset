@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
+class TicketController extends Controller
 {
     /**
      * @Route("/tickets")
@@ -14,6 +14,6 @@ class DefaultController extends Controller
      */
     public function ticketsAction()
     {
-        return array();
+        return array('title' => 'Tickets');
     }
 }

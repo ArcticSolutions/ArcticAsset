@@ -1,0 +1,198 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="row-fluid">
+  <div class="span3">
+    <ul class="nav nav-pills nav-pills-large nav-stacked">
+      <li class="active">
+        <a href="#">
+          My Unresolved Cases
+          <span class="badge badge-success pull-right">1</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          Unassigned Cases
+          <span class="badge badge-warning pull-right">7</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          All Unresolved Cases
+          <span class="badge badge-important pull-right">12</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          All Cases
+          <span class="badge badge-important pull-right">12</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!--/span-->
+  <div class="span9">
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      New case for <strong>Hansen, Johan (st7swusa)</strong>
+      added.
+    </div>
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      There are 12 unresolved cases!
+    </div>
+    <section class="whiteBackground greyBorder roundedCorners">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Users name</th>
+            <th>Serialnumber</th>
+            <th>Subject</th>
+            <th>Assigned</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Stangeby, David</td>
+            <td>hup5at8u</td>
+            <td>Defective harddrive</td>
+            <td>(me)</td>
+            <td>
+              <span class="label label-warning">New</span>
+            </td>
+            <td>1 day ago</td>
+            <td>
+              <a href="case.html"> <i class="icon-pencil"></i>
+              </a>
+              <a href="#"> <i class="icon-share-alt"></i>
+              </a>
+              <a href="#myModal" data-toggle="modal">
+                <i class="icon-remove"></i>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Nilsen, Harald</td>
+            <td>mes5stap</td>
+            <td>Reinstall</td>
+            <td>Vinje, Harald</td>
+            <td>
+              <span class="label label-warning">New</span>
+            </td>
+            <td>1 day ago</td>
+            <td>
+              <a href="case.html">
+                <i class="icon-pencil"></i>
+              </a>
+              <a href="#">
+                <i class="icon-share-alt"></i>
+              </a>
+              <a href="#myModal" data-toggle="modal">
+                <i class="icon-remove"></i>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Hansen, Johan</td>
+            <td>st7swusa</td>
+            <td>Wlan not working</td>
+            <td>Wierlie, Odd Einar</td>
+            <td>
+              <span class="label label-info">Updated</span>
+            </td>
+            <td>5 days ago</td>
+            <td>
+              <a href="case.html">
+                <i class="icon-pencil"></i>
+              </a>
+              <a href="#">
+                <i class="icon-share-alt"></i>
+              </a>
+              <a href="#myModal" data-toggle="modal">
+                <i class="icon-remove"></i>
+              </a>
+            </td>
+          </tr>
+          <tr class="error">
+            <td>4</td>
+            <td>Nordman, Ola</td>
+            <td>7pehuneh</td>
+            <td>Defective harddrive</td>
+            <td>Vinje, Harald</td>
+            <td>
+              <span class="label label-important">Old</span>
+            </td>
+            <td>2 days ago</td>
+            <td>
+              <a href="case.html">
+                <i class="icon-pencil"></i>
+              </a>
+              <a href="#">
+                <i class="icon-share-alt"></i>
+              </a>
+              <a href="#myModal" data-toggle="modal">
+                <i class="icon-remove"></i>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Syvertsen, Silje</td>
+            <td>5espu4ru</td>
+            <td>Reinstall</td>
+            <td>Lund, Asbjørn</td>
+            <td>
+              <span class="label label-success">Complete</span>
+            </td>
+            <td>1 day ago</td>
+            <td>
+              <a href="case.html">
+                <i class="icon-pencil"></i>
+              </a>
+              <a href="#">
+                <i class="icon-share-alt"></i>
+              </a>
+              <a href="#myModal" data-toggle="modal">
+                <i class="icon-remove"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <div class="pagination pagination-centered">
+      <ul>
+        <li class="disabled">
+          <a href="#">Prev</a>
+        </li>
+        <li class="active">
+          <a href="#">1</a>
+        </li>
+        <li>
+          <a href="#">2</a>
+        </li>
+        <li>
+          <a href="#">3</a>
+        </li>
+        <li>
+          <a href="#">4</a>
+        </li>
+        <li>
+          <a href="#">Next</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--/span-->
+</div>
+<!--/row-->
+</div>
+<!--/row-->
+{% endblock %}

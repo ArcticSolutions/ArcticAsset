@@ -1,0 +1,157 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="row-fluid">
+	<div class="span3">
+		<ul class="nav nav-pills nav-pills-large nav-stacked">
+			<li class="active">
+				<a href="#">
+					All assets
+					<span class="badge pull-right">697</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					Computers
+					<span class="badge pull-right">623</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					Printers
+					<span class="badge pull-right">32</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					Projectors
+					<span class="badge pull-right">24</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<!--/span-->
+	<div class="span9">
+		{% for type, flashMessages in app.session.flashbag.all() %}
+	        {% for flashMessage in flashMessages %}
+	            <div class="alert alert-{{ type }}">
+	            	<button type="button" class="close" data-dismiss="alert">×</button>
+	            	{{ flashMessage }}
+	            </div>
+	        {% endfor %}
+	    {% endfor %}
+		<section class="whiteBackground greyBorder roundedCorners">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Users name</th>
+						<th>Serialnumber</th>
+						<th>Type</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Stangeby, David</td>
+						<td>hup5at8u</td>
+						<td>Computer</td>
+						<td>Dell</td>
+						<td>Vostro 3300</td>
+						<td>
+							<span class="label label-success">OK</span>
+						</td>
+						<td>
+							<button class="btn btn-mini" type="button">New case</button>
+						</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Nilsen, Harald</td>
+						<td>mes5stap</td>
+						<td>Computer</td>
+						<td>Dell</td>
+						<td>Vostro 3500</td>
+						<td>
+							<span class="label label-important">Active case</span>
+						</td>
+						<td>
+							<button class="btn btn-mini" type="button">New case</button>
+						</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>D3</td>
+						<td>st7swusa</td>
+						<td>Projector</td>
+						<td>BenQ</td>
+						<td>MP720P</td>
+						<td>
+							<span class="label label-success">OK</span>
+						</td>
+						<td>
+							<button class="btn btn-mini" type="button">New case</button>
+						</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Nordman, Ola</td>
+						<td>7pehuneh</td>
+						<td>Computer</td>
+						<td>Dell</td>
+						<td>Latitude E5420</td>
+						<td>
+							<span class="label label-success">OK</span>
+						</td>
+						<td>
+							<button class="btn btn-mini" type="button">New case</button>
+						</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>E20</td>
+						<td>5espu4ru</td>
+						<td>Printer</td>
+						<td>Lexmark</td>
+						<td>E543dn</td>
+						<td>
+							<span class="label label-success">OK</span>
+						</td>
+						<td>
+							<button class="btn btn-mini" type="button">New case</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<div class="pagination pagination-centered">
+			<ul>
+				<li class="disabled">
+					<a href="#">Prev</a>
+				</li>
+				<li class="active">
+					<a href="#">1</a>
+				</li>
+				<li>
+					<a href="#">2</a>
+				</li>
+				<li>
+					<a href="#">3</a>
+				</li>
+				<li>
+					<a href="#">4</a>
+				</li>
+				<li>
+					<a href="#">Next</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/span-->
+</div>
+<!--/row-->
+{% endblock %}

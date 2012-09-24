@@ -1,5 +1,5 @@
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 <p class="navbar-text pull-right">
-  <a href="{{ path('fos_user_profile_show') }}" class="navbar-link">{{ 'layout.logged_in_as'|trans({'%username%': app.user.name}, 'FOSUserBundle') }}</a>
+  <a href="{{ path('fos_user_profile_edit') }}" class="navbar-link">{{ 'layout.logged_in_as'|trans({'%username%': app.user.name}, 'FOSUserBundle') }}</a> <a href="{{ path('fos_user_security_logout') }}"><i class="icon-remove icon-white"></i></a>
 </p>
 {% endif %}

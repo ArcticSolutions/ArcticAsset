@@ -18,13 +18,8 @@ class RegistrationFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('name', null, array('label' => 'form.name', 'translation_domain' => 'FOSUserBundle'));
         parent::buildForm($builder, $options);
-
-        $builder
-            ->add('username')
-            ->add('email', 'email')
-            ->add('name')
-            ->add('plainPassword', 'repeated', array('type' => 'password'));
     }
 
     public function getName()

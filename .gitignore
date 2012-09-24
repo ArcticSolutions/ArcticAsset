@@ -50,3 +50,6 @@ build/config/buildinfo.properties
 /vendor/
 /app/config/parameters.yml
 /bin/bin/doctrine*
+
+# Ignore the composer.lock file
+composer.lock
