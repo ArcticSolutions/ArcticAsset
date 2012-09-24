@@ -41,9 +41,15 @@
                 {% include "::user.html.twig" %}
                 
                 <ul class="nav">
-                  <li class="active"><a href="{{ path('arctic_dashboard_dashboard_dashboard') }}">Dashboard</a></li>
-                  <li><a href="{{ path('arctic_ticket_ticket_tickets') }}">Tickets</a></li>
-                  <li><a href="{{ path('arctic_asset_asset_assets') }}">Assets</a></li>
+                  <li {% if app.request.attributes.get('_route') == 'arctic_dashboard_dashboard_dashboard' %}class="active"{% endif %}>
+                    <a href="{{ path('arctic_dashboard_dashboard_dashboard') }}">Dashboard</a>
+                  </li>
+                  <li {% if app.request.attributes.get('_route') == 'arctic_ticket_ticket_tickets' %}class="active"{% endif %}>
+                    <a href="{{ path('arctic_ticket_ticket_tickets') }}">Tickets</a>
+                  </li>
+                  <li {% if app.request.attributes.get('_route') == 'arctic_asset_asset_assets' %}class="active"{% endif %}>
+                    <a href="{{ path('arctic_asset_asset_assets') }}">Assets</a>
+                  </li>
                 </ul>
                 <form class="navbar-search">
                   <input type="text" class="search-query" placeholder="Search">
