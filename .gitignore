@@ -49,3 +49,4 @@ build/config/buildinfo.properties
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
+/bin/bin/doctrine*
