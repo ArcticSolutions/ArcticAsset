@@ -1,0 +1,13 @@
+{% extends ':Common:span8nonav.html.twig' %}
+
+{% block mainSpan %}
+<h1>Asset creation</h1>
+
+<form action="{{ path('asset_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{{ path('asset') }}" class="btn">Cancel</a>
+    </div>
+</form>
+{% endblock %}

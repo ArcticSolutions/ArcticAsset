@@ -6,36 +6,50 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AssetControllerTest extends WebTestCase
 {
-	private $client;
+    /*
+    public function testCompleteScenario()
+    {
+        // Create a new client to browse the application
+        $client = static::createClient();
 
-	public function setUp()
-	{
-		$client = static::createClient();
+        // Create a new entry in the database
+        $crawler = $client->request('GET', '/asset/');
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
-        $crawler = $client->request('GET', '/login');
-
-        $form = $crawler->selectButton('submit')->form(array(
-            '_username'  => 'test_user',
-            '_password'  => '1234',
+        // Fill in the form and submit it
+        $form = $crawler->selectButton('Create')->form(array(
+            'arctic_assetbundle_assettype[field_name]'  => 'Test',
+            // ... other fields to fill
         ));
 
         $client->submit($form);
-        $client->followRedirects();
-        $this->client = $client;
-	}
+        $crawler = $client->followRedirect();
 
+        // Check data in the show view
+        $this->assertTrue($crawler->filter('td:contains("Test")')->count() > 0);
 
-    public function testIndex()
-    {
-        $crawler = $this->client->request('GET', '/assets');
+        // Edit the entity
+        $crawler = $client->click($crawler->selectLink('Edit')->link());
 
-        $this->assertEquals('ArcticAsset - Assets', $crawler->filter('title')->text());
+        $form = $crawler->selectButton('Edit')->form(array(
+            'arctic_assetbundle_assettype[field_name]'  => 'Foo',
+            // ... other fields to fill
+        ));
+
+        $client->submit($form);
+        $crawler = $client->followRedirect();
+
+        // Check the element contains an attribute with value equals "Foo"
+        $this->assertTrue($crawler->filter('[value="Foo"]')->count() > 0);
+
+        // Delete the entity
+        $client->submit($crawler->selectButton('Delete')->form());
+        $crawler = $client->followRedirect();
+
+        // Check the entity has been delete on the list
+        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
 
-    public function testNewAssets()
-    {
-    	$crawler = $this->client->request('GET', '/new_asset');
-
-        $this->assertEquals('ArcticAsset - Add new asset', $crawler->filter('title')->text());
-    }
+    */
 }

@@ -47,8 +47,8 @@
                   <li {% if app.request.attributes.get('_route') == 'arctic_ticket_ticket_tickets' %}class="active"{% endif %}>
                     <a href="{{ path('arctic_ticket_ticket_tickets') }}">Tickets</a>
                   </li>
-                  <li {% if app.request.attributes.get('_route') == 'arctic_asset_asset_assets' %}class="active"{% endif %}>
-                    <a href="{{ path('arctic_asset_asset_assets') }}">Assets</a>
+                  <li {% if app.request.attributes.get('_route') == 'asset' %}class="active"{% endif %}>
+                    <a href="{{ path('asset') }}">Assets</a>
                   </li>
                 </ul>
                 <form class="navbar-search">

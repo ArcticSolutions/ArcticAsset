@@ -29,6 +29,7 @@
 				</a>
 			</li>
 		</ul>
+		<a href="{{ path('asset_new') }}" class="btn btn-success btn-block">Add new asset</a>
 	</div>
 	<!--/span-->
 	<div class="span9">
@@ -40,7 +41,7 @@
 	            </div>
 	        {% endfor %}
 	    {% endfor %}
-		<section class="whiteBackground greyBorder roundedCorners">
+	    <section class="whiteBackground greyBorder roundedCorners">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -55,19 +56,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for asset in assets %}
+					{% for asset in entities %}
 					    <tr>
 					    	<td>{{ asset.id }}</td>
 					    	<td>{{ asset.owner }}</td>
 					    	<td>{{ asset.serialnumber }}</td>
-					    	<td>{{ asset.type }}</td>
-					    	<td>{{ asset.type }}</td>
-					    	<td>{{ asset.id }}</td>
+					    	<td>{{ asset.type.category }}</td>
+					    	<td>{{ asset.type.make }}</td>
+					    	<td>{{ asset.type.model }}</td>
 					    	<td>
 								<span class="label label-success">OK</span>
 							</td>
 							<td>
-								<button class="btn btn-mini" type="button">New case</button>
+								<a href="{{ path('asset_show', { 'id': asset.id }) }}"><i class="icon-search"></i></a>
+								<a href="{{ path('asset_edit', { 'id': asset.id }) }}"><i class="icon-pencil"></i></a>
 							</td>
 					    </tr>
 					{% endfor %}
