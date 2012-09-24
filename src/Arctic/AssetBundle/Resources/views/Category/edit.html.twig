@@ -1,26 +1,13 @@
 {% extends ':Common:span8nonav.html.twig' %}
 
 {% block mainSpan %}
-<h1>Category edit</h1>
+<h1>Edit {{ entity.name }} category</h1>
 
 <form action="{{ path('category_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+    <div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ path('category') }}" class="btn">Cancel</a>
+    </div>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('category') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('category_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
 {% endblock %}

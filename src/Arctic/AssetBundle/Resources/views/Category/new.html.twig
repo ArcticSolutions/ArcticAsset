@@ -1,14 +1,13 @@
 {% extends ':Common:span8nonav.html.twig' %}
 
 {% block mainSpan %}
-<h1>Category creation</h1>
+<h1>New category</h1>
 
 <form action="{{ path('category_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <div>
     	<button type="submit" class="btn btn-primary">Create</button>
+    	<a href="{{ path('category') }}" class="btn">Cancel</a>
     </div>
 </form>
-
-<a href="{{ path('category') }}">Back to the list</a>
 {% endblock %}

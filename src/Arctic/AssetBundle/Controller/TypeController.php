@@ -93,6 +93,7 @@ class TypeController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', $entity . ' was created');
             return $this->redirect($this->generateUrl('type_show', array('id' => $entity->getId())));
         }
 
@@ -153,7 +154,8 @@ class TypeController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('type_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('success', $entity . ' was saved');
+            return $this->redirect($this->generateUrl('type_show', array('id' => $id)));
         }
 
         return array(
@@ -186,6 +188,7 @@ class TypeController extends Controller
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->add('success', $entity . ' was deleted');
         return $this->redirect($this->generateUrl('type'));
     }
 

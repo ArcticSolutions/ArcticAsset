@@ -7,9 +7,9 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Name</th>
             <th>Created</th>
             <th>Updated</th>
-            <th>Name</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -17,23 +17,17 @@
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.name }}</td>
             <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.name }}</td>
             <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('category_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('category_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <a href="{{ path('category_show', { 'id': entity.id }) }}"><i class="icon-search"></i></a>
+                <a href="{{ path('category_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<a href="{{ path('category_new') }}">Create a new category</a>
+<a href="{{ path('category_new') }}" class="btn btn-success">Create a new category</a>
 {% endblock %}

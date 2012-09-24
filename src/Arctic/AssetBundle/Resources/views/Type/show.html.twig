@@ -1,18 +1,13 @@
-<h1>Type</h1>
+{% extends ':Common:span8nonav.html.twig' %}
 
-<table class="record_properties">
+{% block mainSpan %}
+<h1>{{ entity.model }}</h1>
+
+<table class="table">
     <tbody>
         <tr>
             <th>Id</th>
             <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Created</th>
-            <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Updated</th>
-            <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
         </tr>
         <tr>
             <th>Make</th>
@@ -22,24 +17,25 @@
             <th>Model</th>
             <td>{{ entity.model }}</td>
         </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ entity.category.name }}</td>
+        </tr>
+        <tr>
+            <th>Created</th>
+            <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Updated</th>
+            <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
+        </tr>
     </tbody>
 </table>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('type') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('type_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('type_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<form action="{{ path('type_delete', { 'id': entity.id }) }}" method="post">
+    {{ form_widget(delete_form) }}
+    <a href="{{ path('type') }}" class="btn">Back to the list</a>
+    <a href="{{ path('type_edit', { 'id': entity.id }) }}" class="btn">Edit</a>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}

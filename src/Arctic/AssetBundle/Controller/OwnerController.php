@@ -93,6 +93,7 @@ class OwnerController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'Owner ' . $entity->getName() . ' was created');
             return $this->redirect($this->generateUrl('owner_show', array('id' => $entity->getId())));
         }
 
@@ -153,7 +154,8 @@ class OwnerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('owner_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('success', 'Owner ' . $entity->getName() . ' was saved');
+            return $this->redirect($this->generateUrl('owner_show', array('id' => $id)));
         }
 
         return array(
@@ -186,6 +188,7 @@ class OwnerController extends Controller
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->add('success', 'Owner ' . $entity->getName() . ' was deleted');
         return $this->redirect($this->generateUrl('owner'));
     }
 

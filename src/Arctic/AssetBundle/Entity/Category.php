@@ -56,6 +56,10 @@ class Category
         $this->types = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return sprintf('%s', $this->name);
+    }
 
     /**
      * Get id

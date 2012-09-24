@@ -93,6 +93,7 @@ class CategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'Category ' . $entity->getName() . ' was created');
             return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
         }
 
@@ -153,7 +154,8 @@ class CategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
+            $this->get('session')->getFlashBag()->add('success', 'Category ' . $entity->getName() . ' was saved');
+            return $this->redirect($this->generateUrl('category_show', array('id' => $id)));
         }
 
         return array(
@@ -186,6 +188,7 @@ class CategoryController extends Controller
             $em->flush();
         }
 
+        $this->get('session')->getFlashBag()->add('success', 'Category ' . $entity->getName() . ' was deleted');
         return $this->redirect($this->generateUrl('category'));
     }
 
