@@ -55,80 +55,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Stangeby, David</td>
-						<td>hup5at8u</td>
-						<td>Computer</td>
-						<td>Dell</td>
-						<td>Vostro 3300</td>
-						<td>
-							<span class="label label-success">OK</span>
-						</td>
-						<td>
-							<button class="btn btn-mini" type="button">New case</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Nilsen, Harald</td>
-						<td>mes5stap</td>
-						<td>Computer</td>
-						<td>Dell</td>
-						<td>Vostro 3500</td>
-						<td>
-							<span class="label label-important">Active case</span>
-						</td>
-						<td>
-							<button class="btn btn-mini" type="button">New case</button>
-						</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>D3</td>
-						<td>st7swusa</td>
-						<td>Projector</td>
-						<td>BenQ</td>
-						<td>MP720P</td>
-						<td>
-							<span class="label label-success">OK</span>
-						</td>
-						<td>
-							<button class="btn btn-mini" type="button">New case</button>
-						</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>Nordman, Ola</td>
-						<td>7pehuneh</td>
-						<td>Computer</td>
-						<td>Dell</td>
-						<td>Latitude E5420</td>
-						<td>
-							<span class="label label-success">OK</span>
-						</td>
-						<td>
-							<button class="btn btn-mini" type="button">New case</button>
-						</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>E20</td>
-						<td>5espu4ru</td>
-						<td>Printer</td>
-						<td>Lexmark</td>
-						<td>E543dn</td>
-						<td>
-							<span class="label label-success">OK</span>
-						</td>
-						<td>
-							<button class="btn btn-mini" type="button">New case</button>
-						</td>
-					</tr>
+					{% for asset in assets %}
+					    <tr>
+					    	<td>{{ asset.id }}</td>
+					    	<td>{{ asset.owner }}</td>
+					    	<td>{{ asset.serialnumber }}</td>
+					    	<td>{{ asset.type }}</td>
+					    	<td>{{ asset.type }}</td>
+					    	<td>{{ asset.id }}</td>
+					    	<td>
+								<span class="label label-success">OK</span>
+							</td>
+							<td>
+								<button class="btn btn-mini" type="button">New case</button>
+							</td>
+					    </tr>
+					{% endfor %}
 				</tbody>
 			</table>
 		</section>
-		<div class="pagination pagination-centered">
+		<!--<div class="pagination pagination-centered">
 			<ul>
 				<li class="disabled">
 					<a href="#">Prev</a>
@@ -149,7 +95,7 @@
 					<a href="#">Next</a>
 				</li>
 			</ul>
-		</div>
+		</div>-->
 	</div>
 	<!--/span-->
 </div>

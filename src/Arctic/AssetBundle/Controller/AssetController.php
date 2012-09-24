@@ -17,7 +17,11 @@ class AssetController extends Controller
      */
     public function assetsAction()
     {
-        return array('title' => 'Assets');
+        $assets = $this->getDoctrine()
+            ->getRepository('ArcticAssetBundle:Asset')
+            ->findAll();
+        return array(   'title' => 'Assets',
+                        'assets' => $assets);
     }
 
     /**
