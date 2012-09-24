@@ -1,6 +1,9 @@
-<h1>Category list</h1>
+{% extends ':Common:span8nonav.html.twig' %}
 
-<table class="records_list">
+{% block mainSpan %}
+<h1>Categories</h1>
+
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>Id</th>
@@ -32,10 +35,5 @@
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('category_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+<a href="{{ path('category_new') }}">Create a new category</a>
+{% endblock %}

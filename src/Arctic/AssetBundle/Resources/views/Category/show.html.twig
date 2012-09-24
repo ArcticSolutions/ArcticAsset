@@ -1,6 +1,9 @@
-<h1>Category</h1>
+{% extends ':Common:span8nonav.html.twig' %}
 
-<table class="record_properties">
+{% block mainSpan %}
+<h1>{{ entity.name }} category</h1>
+
+<table class="table">
     <tbody>
         <tr>
             <th>Id</th>
@@ -21,21 +24,15 @@
     </tbody>
 </table>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('category') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('category_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('category_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<a class="btn" href="{{ path('category') }}">
+    Back to the list
+</a>
+<a class="btn" href="{{ path('category_edit', { 'id': entity.id }) }}">
+    Edit
+</a>
+<form class="form-inline" action="{{ path('category_delete', { 'id': entity.id }) }}" method="post">
+    {{ form_widget(delete_form.id) }}
+    {{ form_widget(delete_form._token) }}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}
