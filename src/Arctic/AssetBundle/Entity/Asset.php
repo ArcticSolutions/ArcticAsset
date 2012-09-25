@@ -4,12 +4,15 @@ namespace Arctic\AssetBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Arctic\AssetBundle\Entity\Asset
  *
  * @ORM\Table(indexes={@ORM\Index(name="productnumber_idx", columns={"productnumber"})})
  * @ORM\Entity(repositoryClass="Arctic\AssetBundle\Entity\AssetRepository")
+ * @UniqueEntity("serialnumber")
  */
 class Asset
 {
@@ -42,20 +45,21 @@ class Asset
      * @var string $serialnumber
      *
      * @ORM\Column(name="serialnumber", type="string", length=255, unique=true)
+     * @Assert\NotBlank
      */
     private $serialnumber;
 
     /**
      * @var string $productnumber
      *
-     * @ORM\Column(name="productnumber", type="string", length=255)
+     * @ORM\Column(name="productnumber", type="string", length=255, nullable=true)
      */
     private $productnumber;
 
     /**
      * @var string $tag
      *
-     * @ORM\Column(name="tag", type="string", length=255)
+     * @ORM\Column(name="tag", type="string", length=255, nullable=true)
      */
     private $tag;
 

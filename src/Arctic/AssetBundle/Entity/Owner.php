@@ -5,11 +5,12 @@ namespace Arctic\AssetBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Arctic\AssetBundle\Entity\Owner
  *
- * @ORM\Table()
+ * @ORM\Table(indexes={@ORM\Index(name="name_idx", columns={"name"})})
  * @ORM\Entity(repositoryClass="Arctic\AssetBundle\Entity\OwnerRepository")
  */
 class Owner
@@ -43,13 +44,14 @@ class Owner
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -65,7 +67,10 @@ class Owner
 
     public function __toString()
     {
-        return sprintf('%s (%s)', $this->name, $this->description);
+        if (!empty($this->description)) {
+            return sprintf('%s (%s)', $this->name, $this->description);
+        }
+        return sprintf('%s', $this->name);
     }
 
     /**

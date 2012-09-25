@@ -5,12 +5,15 @@ namespace Arctic\AssetBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Arctic\AssetBundle\Entity\Category
  *
- * @ORM\Table()
+ * @ORM\Table(indexes={@ORM\Index(name="name_idx", columns={"name"})})
  * @ORM\Entity(repositoryClass="Arctic\AssetBundle\Entity\CategoryRepository")
+ * @UniqueEntity("name")
  */
 class Category
 {
@@ -42,7 +45,8 @@ class Category
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank
      */
     private $name;
 

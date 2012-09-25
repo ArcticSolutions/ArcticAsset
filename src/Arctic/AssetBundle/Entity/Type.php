@@ -5,12 +5,17 @@ namespace Arctic\AssetBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Arctic\AssetBundle\Entity\Type
  *
- * @ORM\Table()
+ * @ORM\Table(
+ *      indexes={@ORM\Index(name="make_idx", columns={"make"})}
+ * )
  * @ORM\Entity(repositoryClass="Arctic\AssetBundle\Entity\TypeRepository")
+ * @UniqueEntity("model")
  */
 class Type
 {
@@ -43,6 +48,7 @@ class Type
      * @var string $make
      *
      * @ORM\Column(name="make", type="string", length=255)
+     * @Assert\NotBlank
      */
     private $make;
 
@@ -50,12 +56,14 @@ class Type
      * @var string $model
      *
      * @ORM\Column(name="model", type="string", length=255, unique=true)
+     * @Assert\NotBlank
      */
     private $model;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="types")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @Assert\NotNull
      */
     private $category;
 
@@ -71,7 +79,7 @@ class Type
 
     public function __toString()
     {
-        return sprintf('%s (%s)', $this->model, $this->make);
+        return sprintf('%s %s', $this->make, $this->model);
     }
 
     /**
