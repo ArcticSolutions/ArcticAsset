@@ -47,8 +47,15 @@
                   <li {% if app.request.attributes.get('_route') == 'arctic_ticket_ticket_tickets' %}class="active"{% endif %}>
                     <a href="{{ path('arctic_ticket_ticket_tickets') }}">Tickets</a>
                   </li>
-                  <li {% if app.request.attributes.get('_route') == 'asset' %}class="active"{% endif %}>
-                    <a href="{{ path('asset') }}">Assets</a>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Assets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ path('asset') }}" class="active">List</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{{ path('owner') }}">Owners</a></li>
+                      <li><a href="{{ path('type') }}">Types</a></li>
+                      <li><a href="{{ path('category') }}">Categories</a></li>
+                    </ul>
                   </li>
                 </ul>
                 <form class="navbar-search">
