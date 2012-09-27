@@ -1,0 +1,137 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span4 whiteBackground greyBorder roundedCorners details">
+        <ul class="nav nav-tabs noBottomMargin">
+            <li class="active">
+                <a href="#caseDetails" data-toggle="tab">Case details</a>
+            </li>
+            <li>
+                <a href="#assetDetails" data-toggle="tab">Asset details</a>
+            </li>
+        </ul>
+        <div class="tab-content whiteSmokeBackground">
+            <div class="tab-pane fade active in padding15px" id="caseDetails">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    Case details saved.
+                </div>
+                <form action="{{ path('ticket_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(ticket_form) }}>
+                    {{ form_widget(ticket_form) }}
+                    <div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+                <hr>
+                <div class="accordion" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                1 ATTACHMENTS
+                                <button class="btn btn-mini btn-success pull-right">Add</button>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse">
+                            <div class="accordion-inner">Error.jpg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/caseDetails-->
+            <div class="tab-pane fade padding15px" id="assetDetails">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    Asset details saved.
+                </div>
+                <form>
+                    <div class="control-group">
+                        <label class="control-label" for="inputUsersName">Users name</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputUsersName" placeholder="Users name" value="Eilertsen, Grethe"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputTag">Tag</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputTag" placeholder="Tag" value="PED"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputSubject">Computer name</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputSubject" placeholder="Computer name" value="MOVS38218"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputSerialnumber">Serialnumber</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputSerialnumber" placeholder="Serialnumber" value="CNU9296J9T"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputProductnumber">Productnumber</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputProductnumber" placeholder="Productnumber" value="GW687AV"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputManufaturer">Manufaturer</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputManufaturer" placeholder="Manufaturer" value="HP"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputModel">Model</label>
+                        <div class="controls">
+                            <input class="input-xlarge" type="text" id="inputModel" placeholder="Model" value="Compaq 6730b"></div>
+                    </div>
+                    <div class="form-actions noBottomMargin">
+                        <button type="submit" class="btn btn-block btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <!--/assetDetails--> </div>
+        <!--/tab-content--> </div>
+    <!--/span4-->
+
+    <div class="span8 whiteBackground greyBorder roundedCorners caseLogs">
+        <section id="logs" class="whiteBackground roundedCorners padding15px">
+            <div class="log">
+                <div class="row-fluid">
+                    <div class="span6"> <strong>By: Stangeby, David</strong>
+                    </div>
+                    <div class="span6 right">SEP 4TH, 2012 AT 7:57PM</div>
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae lorem lorem, eu dapibus sapien. Donec sed est sit amet tellus consequat fermentum. Nam et neque vitae urna feugiat pretium sit amet viverra ante. Aliquam aliquam eleifend mauris, eget scelerisque tortor pretium sollicitudin. Donec ullamcorper lacinia enim. Nulla a urna sed augue dignissim ullamcorper eget vel dui. Fusce nec tellus nec lectus volutpat auctor. Curabitur eleifend laoreet mauris in blandit. Cras convallis placerat ipsum in euismod.
+                </p>
+
+                <p>
+                    In orci ipsum, condimentum sed gravida ornare, dapibus vulputate erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis odio dolor, porta vel porttitor non, mattis in est. Praesent et mattis eros. Quisque ut mi eu velit ullamcorper auctor eget eget nunc. Nam dui nulla, hendrerit iaculis ultricies vitae, vehicula vitae risus. Donec tincidunt lectus at sem suscipit eu porta risus hendrerit. Integer adipiscing posuere massa, eget pulvinar eros hendrerit eu. Nam accumsan lobortis enim, facilisis egestas justo vulputate eu.
+                </p>
+            </div>
+            <hr>
+            <div class="log">
+                <div class="row-fluid">
+                    <div class="span6"> <strong>By: Vinje, Harald</strong>
+                    </div>
+                    <div class="span6 right">SEP 5TH, 2012 AT 8:35PM</div>
+                </div>
+                <p>
+                    Fusce bibendum elit id mi vehicula mattis. Nulla facilisi. Etiam faucibus nisl eu nunc volutpat sed rutrum purus tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas diam lacus, aliquam in accumsan vel, tempus non risus. Pellentesque tincidunt suscipit augue sit amet mollis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur quis sem ut libero facilisis imperdiet vel non ipsum. Morbi vehicula elementum arcu a egestas. Quisque et tempor sem. Quisque vel tempus purus. In volutpat nibh nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed vitae velit id velit placerat iaculis vestibulum eget lectus. Quisque tempor leo tortor, sed consequat augue. Praesent orci nisl, volutpat sit amet ultrices at, venenatis eu enim.
+                </p>
+            </div>
+        </section>
+        <div class="newLog padding15px">
+            <form>
+                <legend>New log entry</legend>
+                <div class="control-group">
+                    <textarea rows="5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae lorem lorem, eu dapibus sapien. Donec sed est sit amet tellus consequat fermentum. Nam et neque vitae urna feugiat pretium sit amet viverra ante. Aliquam aliquam eleifend mauris, eget scelerisque tortor pretium sollicitudin. Donec ullamcorper lacinia enim. Nulla a urna sed augue dignissim ullamcorper eget vel dui. Fusce nec tellus nec lectus volutpat auctor. Curabitur eleifend laoreet mauris in blandit. Cras convallis placerat ipsum in euismod.
+                    </textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/span8-->
+</div>
+<!--/row-->
+{% endblock %}

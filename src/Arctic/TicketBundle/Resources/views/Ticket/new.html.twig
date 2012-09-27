@@ -1,0 +1,13 @@
+{% extends ':Common:span8nonav.html.twig' %}
+
+{% block mainSpan %}
+<h1>Ticket creation</h1>
+
+<form action="{{ path('ticket_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{{ path('ticket') }}" class="btn">Cancel</a>
+    </div>
+</form>
+{% endblock %}

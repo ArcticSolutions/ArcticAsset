@@ -42,6 +42,11 @@ class User extends BaseUser
         $this->tickets = new ArrayCollection();
 	}
 
+    public function __toString()
+    {
+        return sprintf('%s', $this->name);
+    }
+
 	/**
      * Set name
      *

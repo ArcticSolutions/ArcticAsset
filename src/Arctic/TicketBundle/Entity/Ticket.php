@@ -5,6 +5,7 @@ namespace Arctic\TicketBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Arctic\TicketBundle\Entity\Ticket
@@ -26,6 +27,7 @@ class Ticket
     /**
      * @var \DateTime $created
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
@@ -49,6 +51,7 @@ class Ticket
      * @var integer $status
      *
      * @ORM\Column(name="status", type="integer")
+     * @Assert\Choice(choices={1,2,3}, message="Choose a valid status.")
      */
     private $status;
 

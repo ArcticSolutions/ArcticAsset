@@ -80,6 +80,10 @@ class Asset
      */
     private $tickets;
 
+    public function __toString()
+    {
+        return sprintf('%s (%s)', $this->owner->getName(), $this->serialnumber);
+    }
 
     /**
      * Get id
