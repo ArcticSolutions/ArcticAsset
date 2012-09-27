@@ -21,17 +21,23 @@ class AssetController extends Controller
      * Lists all Asset entities.
      *
      * @Route("/", name="asset")
+     * @Route("/category/{categoryId}", name="asset_by_category", requirements={"categoryId" = "\d+"})
      * @Template()
      */
-    public function assetsAction()
+    public function assetsAction($categoryId = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ArcticAssetBundle:Asset')->findAll();
+        $assets = $em->getRepository('ArcticAssetBundle:Asset')->getAssetsForListView($categoryId);
+        $assetsByCategory = $em->getRepository('ArcticAssetBundle:Asset')->getCountOfAssetssInCategory();
+        $assetsTotal = $em->getRepository('ArcticAssetBundle:Asset')->getCountOfAssets();
 
         return array(
-            'title'       => 'Assets',
-            'entities' => $entities,
+            'title'                 => 'Assets',
+            'assets'                => $assets,
+            'assetsByCategory'      => $assetsByCategory,
+            'assetsTotal'           => $assetsTotal,
+            'selectedCategory'      => $categoryId
         );
     }
 

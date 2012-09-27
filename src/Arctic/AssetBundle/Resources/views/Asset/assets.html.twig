@@ -4,30 +4,20 @@
 <div class="row-fluid">
 	<div class="span3">
 		<ul class="nav nav-pills nav-pills-large nav-stacked">
-			<li class="active">
-				<a href="#">
+			<li {% if selectedCategory == null %}class="active"{% endif %}>
+				<a href="{{ path('asset') }}">
 					All assets
-					<span class="badge pull-right">697</span>
+					<span class="badge pull-right">{{ assetsTotal }}</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					Computers
-					<span class="badge pull-right">623</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					Printers
-					<span class="badge pull-right">32</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					Projectors
-					<span class="badge pull-right">24</span>
-				</a>
-			</li>
+			{% for category in assetsByCategory %}
+			    <li  {% if selectedCategory == category.id %}class="active"{% endif %}>
+					<a href="{{ path('asset_by_category', { 'categoryId': category.id }) }}">
+						{{ category.name }}
+						<span class="badge pull-right">{{ category.amount }}</span>
+					</a>
+				</li>
+			{% endfor %}
 		</ul>
 		<a href="{{ path('asset_new') }}" class="btn btn-success btn-block">Add new asset</a>
 	</div>
@@ -56,14 +46,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for asset in entities %}
+					{% if assets|length == 0 %}
+						<tr>
+							<td colspan="8" class="center">No assets found</td>
+						</tr>
+					{% endif %}
+					{% for asset in assets %}
 					    <tr>
 					    	<td>{{ asset.id }}</td>
-					    	<td>{{ asset.owner }}</td>
+					    	<td>{{ asset.name }}</td>
 					    	<td>{{ asset.serialnumber }}</td>
-					    	<td>{{ asset.type.category }}</td>
-					    	<td>{{ asset.type.make }}</td>
-					    	<td>{{ asset.type.model }}</td>
+					    	<td>{{ asset.category }}</td>
+					    	<td>{{ asset.make }}</td>
+					    	<td>{{ asset.model }}</td>
 					    	<td>
 								<span class="label label-success">OK</span>
 							</td>

@@ -12,4 +12,62 @@ use Doctrine\ORM\EntityRepository;
  */
 class AssetRepository extends EntityRepository
 {
+	public function getAssetsForListView($categoryId = null)
+	{
+		$query = $this->getEntityManager()->createQueryBuilder();
+
+		$query = $query	->select('a.id as id, a.serialnumber as serialnumber, c.name as category,
+								  o.name as name, o.description as description, t.make as make, 
+								  t.model as model')
+						->from('ArcticAssetBundle:Asset', 'a')
+						->innerJoin('ArcticAssetBundle:Owner', 'o', 'WITH', 'o.id = a.owner')
+						->innerJoin('ArcticAssetBundle:Type', 't', 'WITH', 't.id = a.type')
+						->innerJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category');
+		
+		if(!is_null($categoryId)) {
+			$query = $query ->where('t.category = :categoryId')
+							->setParameter('categoryId', $categoryId);
+		}
+
+		$query = $query->getQuery();
+
+		try {
+			return $query->getArrayResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
+
+	public function getCountOfAssetssInCategory()
+	{
+		$query = $this->getEntityManager()->createQueryBuilder();
+
+		$query = $query	->select('count(a.id) as amount, c.name as name, c.id as id')
+						->from('ArcticAssetBundle:Asset', 'a')
+						->innerJoin('ArcticAssetBundle:Type', 't', 'WITH', 't.id = a.type')
+						->leftJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category')
+						->groupBy('t.category')
+						->getQuery();
+
+		try {
+			return $query->getArrayResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
+
+	public function getCountOfAssets()
+	{
+		$query = $this->getEntityManager()->createQueryBuilder();
+
+		$query = $query ->select('count(a.id) as amount')
+						->from('ArcticAssetBundle:Asset', 'a')
+						->getQuery();
+
+		try {
+			return $query->getSingleScalarResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
 }
