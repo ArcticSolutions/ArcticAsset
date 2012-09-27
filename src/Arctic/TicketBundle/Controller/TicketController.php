@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Arctic\TicketBundle\Entity\Ticket;
 use Arctic\TicketBundle\Form\TicketType;
+use Arctic\TicketBundle\Form\LogType;
+use Arctic\AssetBundle\Form\AssetType;
 
 /**
  * Ticket controller.
@@ -44,19 +46,22 @@ class TicketController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ArcticTicketBundle:Ticket')->find($id);
+        $ticket = $em->getRepository('ArcticTicketBundle:Ticket')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ticket entity.');
+        if (!$ticket) {
+            throw $this->createNotFoundException('Unable to find Ticket.');
         }
 
-        $ticketForm   = $this->createForm(new TicketType(), $entity);
-
+        $ticketForm = $this->createForm(new TicketType(), $ticket);
+        $assetForm = $this->createForm(new AssetType(), $ticket->getAsset());
+        $logForm = $this->createForm(new LogType());
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'ticket'      => $ticket,
             'ticket_form' => $ticketForm->createView(),
+            'log_form'    => $logForm->createView(),
+            'asset_form'  => $assetForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -106,32 +111,6 @@ class TicketController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Ticket entity.
-     *
-     * @Route("/{id}/edit", name="ticket_edit")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ArcticTicketBundle:Ticket')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ticket entity.');
-        }
-
-        $editForm = $this->createForm(new TicketType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
      * Edits an existing Ticket entity.
      *
      * @Route("/{id}/update", name="ticket_update")
@@ -156,7 +135,7 @@ class TicketController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('ticket_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }
 
         return array(

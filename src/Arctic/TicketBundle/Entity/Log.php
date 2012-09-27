@@ -31,18 +31,17 @@ class Log
     private $created;
 
     /**
-     * @var integer $user
-     *
-     * @ORM\Column(name="user", type="integer")
-     */
-    private $user;
-
-    /**
      * @var string $statement
      *
      * @ORM\Column(name="statement", type="text")
      */
     private $statement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Arctic\UserBundle\Entity\User", inversedBy="logs")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ticket", inversedBy="logs")

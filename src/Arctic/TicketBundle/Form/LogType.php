@@ -10,12 +10,7 @@ class LogType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('created')
-            ->add('user')
-            ->add('statement')
-            ->add('ticket')
-        ;
+        $builder->add('statement');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

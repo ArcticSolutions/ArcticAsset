@@ -78,13 +78,19 @@ class LogController extends Controller
     /**
      * Creates a new Log entity.
      *
-     * @Route("/create", name="log_create")
+     * @Route("/create/{ticketId}", name="log_create")
      * @Method("POST")
      * @Template("ArcticTicketBundle:Log:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $ticketId)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $ticket = $em->getRepository('ArcticTicketBundle:Ticket')->find($ticketId);
+
         $entity  = new Log();
+        $entity->setTicket($ticket);
+        $entity->setUser($this->getUser());
         $form = $this->createForm(new LogType(), $entity);
         $form->bind($request);
 
@@ -92,14 +98,9 @@ class LogController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('log_show', array('id' => $entity->getId())));
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return $this->redirect($this->generateUrl('ticket_show', array('id' => $ticketId)));
     }
 
     /**

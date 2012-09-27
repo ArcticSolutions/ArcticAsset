@@ -35,6 +35,11 @@ class User extends BaseUser
      */
     private $tickets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Arctic\TicketBundle\Entity\Log", mappedBy="user")
+     */
+    private $logs;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -108,5 +113,38 @@ class User extends BaseUser
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * Add logs
+     *
+     * @param Arctic\TicketBundle\Entity\Log $logs
+     * @return User
+     */
+    public function addLog(\Arctic\TicketBundle\Entity\Log $logs)
+    {
+        $this->logs[] = $logs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove logs
+     *
+     * @param Arctic\TicketBundle\Entity\Log $logs
+     */
+    public function removeLog(\Arctic\TicketBundle\Entity\Log $logs)
+    {
+        $this->logs->removeElement($logs);
+    }
+
+    /**
+     * Get logs
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLogs()
+    {
+        return $this->logs;
     }
 }
