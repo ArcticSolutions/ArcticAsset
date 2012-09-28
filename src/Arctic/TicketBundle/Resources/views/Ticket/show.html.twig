@@ -1,6 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
+{% for type, flashMessages in app.session.flashbag.all() %}
+    {% for flashMessage in flashMessages %}
+        <div class="alert alert-{{ type }}">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+{% endfor %}
 <div class="row-fluid">
     <div class="span4 whiteBackground greyBorder roundedCorners details">
         <ul class="nav nav-tabs noBottomMargin">
@@ -36,7 +44,7 @@
             </div>
             <!--/caseDetails-->
             <div class="tab-pane fade padding15px" id="assetDetails">
-                <form action="{{ path('asset_update', { 'id': ticket.asset.id }) }}" method="post" {{ form_enctype(asset_form) }}>
+                <form action="{{ path('asset_update_from_ticket', { 'assetId': ticket.asset.id, 'ticketId': ticket.id }) }}" method="post" {{ form_enctype(asset_form) }}>
                     {{ form_widget(asset_form) }}
                     <div>
                         <button type="submit" class="btn btn-primary btn-block">Save changes</button>
@@ -49,6 +57,9 @@
 
     <div class="span8 whiteBackground greyBorder roundedCorners caseLogs">
         <section id="logs" class="whiteBackground roundedCorners padding15px">
+            {% if ticket.logs|length == 0 %}
+                <h2 class="center">No logs!</h2>
+            {% endif %}
             {% for log in ticket.logs %}
             <div class="log">
                 <div class="row-fluid">
@@ -66,7 +77,11 @@
         <div class="newLog padding15px">
             <form action="{{ path('log_create', { 'ticketId': ticket.id }) }}" method="post" {{ form_enctype(log_form) }}>
                 <legend>New log entry</legend>
-                {{ form_widget(log_form) }}
+                <div class="control-group">
+                    <textarea id="arctic_ticketbundle_logtype_statement" name="arctic_ticketbundle_logtype[statement]" required="required" rows="10"></textarea>
+                    {{ form_errors(log_form.statement) }}
+                </div>
+                {{ form_widget(log_form._token) }}
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

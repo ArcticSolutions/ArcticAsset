@@ -148,23 +148,14 @@ class AssetController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ArcticAssetBundle:Asset')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Asset entity.');
-        }
+        $entity = $this->getAsset($id);
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new AssetType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'Changes to asset with serialnumber ' . $entity->getSerialnumber() . ' was saved');
+            $this->persistAsset($entity);
             return $this->redirect($this->generateUrl('asset_show', array('id' => $id)));
         }
 
@@ -173,6 +164,27 @@ class AssetController extends Controller
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+    }
+
+    /**
+     * Updates an Asset from the a Ticket
+     *
+     * @Route("/{assetId}/update_from_ticket/{ticketId}", name="asset_update_from_ticket")
+     * @Method("POST")
+     * @Template()
+     */
+    public function updateFromTicketAction(Request $request, $assetId, $ticketId)
+    {
+        $entity = $this->getAsset($assetId);
+
+        $editForm = $this->createForm(new AssetType(), $entity);
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) {
+            $this->persistAsset($entity);
+        }
+
+        return $this->redirect($this->generateUrl('ticket_show', array('id' => $ticketId)));
     }
 
     /**
@@ -208,5 +220,39 @@ class AssetController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * Saved an asset to the database and adds a flash massage
+     * 
+     * @param Asset $asset Asset to be saved
+     */
+    private function persistAsset(Asset $asset)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($asset);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'Changes to asset with serialnumber ' . $asset->getSerialnumber() . ' was saved');
+    }
+
+    /**
+     * Find and returns an asset based on an id
+     *
+     * @param integer $id Id of asset to get
+     * @return Asset
+     */
+    private function getAsset($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ArcticAssetBundle:Asset')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Asset entity.');
+        }
+
+        return $entity;
     }
 }

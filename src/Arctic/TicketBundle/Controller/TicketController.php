@@ -135,6 +135,7 @@ class TicketController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'Ticket was updated');
             return $this->redirect($this->generateUrl('ticket_show', array('id' => $id)));
         }
 
