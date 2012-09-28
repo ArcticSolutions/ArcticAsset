@@ -37,7 +37,8 @@ class LogController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $ticket->setUpdated(new \Datetime());
+            $em->persist($ticket);
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'Log was added');
