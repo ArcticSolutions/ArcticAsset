@@ -20,19 +20,31 @@ use Arctic\AssetBundle\Form\AssetType;
 class TicketController extends Controller
 {
     /**
-     * Lists all Ticket entities.
+     * Lists all Tickets.
      *
      * @Route("/", name="ticket")
+     * @Route("/all", name="ticket_all")
+     * @Route("/all/open", name="ticket_all_open")
      * @Template()
      */
-    public function ticketsAction()
+    public function ticketsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ArcticTicketBundle:Ticket')->findAll();
+        if ($request->get('_route') == 'ticket_all') {
+            $tickets = $em->getRepository('ArcticTicketBundle:Ticket')->getTicketsForListView(null, true);
+        } elseif ($request->get('_route') == 'ticket_all_open') {
+            $tickets = $em->getRepository('ArcticTicketBundle:Ticket')->getTicketsForListView();
+        } else {
+            $tickets = $em->getRepository('ArcticTicketBundle:Ticket')->getTicketsForListView($this->getUser()->getId());
+        }
+
+        $ticketsCount = $em->getRepository('ArcticTicketBundle:Ticket')->getTicketCount($this->getUser()->getId());
 
         return array(
-            'entities' => $entities,
+            'title'         => 'Tickets',
+            'tickets'       => $tickets,
+            'tickets_count' => $ticketsCount
         );
     }
 

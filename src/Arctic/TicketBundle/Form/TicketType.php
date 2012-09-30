@@ -13,7 +13,7 @@ class TicketType extends AbstractType
         $builder
             ->add('subject')
             ->add('status', 'choice', array(
-                'choices' => array(1 => 'New', 2 => 'Complete', 3 => 'Closed')
+                'choices' => array(1 => 'New', 2 => 'Active', 3 => 'Complete', 4 => 'Closed')
             ))
             ->add('asset')
             ->add('user', null, array(

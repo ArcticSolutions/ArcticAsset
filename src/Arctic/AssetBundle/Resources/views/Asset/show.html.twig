@@ -48,6 +48,43 @@
     </tbody>
 </table>
 
+<h2>Tickets</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Subject</th>
+            <th>Assigned</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if entity.tickets|length == 0 %}
+        <tr>
+            <td colspan="4">No tickets</td>
+        </tr>
+        {% endif %}
+        {% for ticket in entity.tickets %}
+        <tr>
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.subject }}</td>
+            <td>{{ ticket.user.name }}</td>
+            <td>
+                {% if ticket.status == 1 %}
+                <span class="label label-warning">New</span>
+                {% elseif ticket.status == 2 %}
+                <span class="label label-info">Active</span>
+                {% elseif ticket.status == 3 %}
+                <span class="label label-success">Complete</span>
+                {% elseif ticket.status == 4 %}
+                <span class="label">Closed</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 <form action="{{ path('asset_delete', { 'id': entity.id }) }}" method="post">
     {{ form_widget(delete_form) }}
     <a href="{{ path('asset') }}" class="btn">Back to the list</a>

@@ -12,4 +12,66 @@ use Doctrine\ORM\EntityRepository;
  */
 class TicketRepository extends EntityRepository
 {
+	public function getTicketsForListView($userId = null, $includeClosed = false)
+	{
+		$query = $this->getEntityManager()->createQueryBuilder();
+
+		$query = $query ->select('t.id as id, t.subject as subject, t.status as status,
+								 t.updated as updated, a.serialnumber as serialnumber,
+								 u.name as assigned, o.name as owner')
+						->from('ArcticTicketBundle:Ticket', 't')
+						->innerJoin('ArcticAssetBundle:Asset', 'a', 'WITH', 'a.id = t.asset')
+						->innerJoin('ArcticAssetBundle:Owner', 'o', 'WITH', 'o.id = a.owner')
+						->innerJoin('ArcticUserBundle:User', 'u', 'WITH', 'u.id = t.user');
+
+		if($includeClosed == false) {
+			$query = $query ->where('t.status <> 4');
+		}
+
+		if(!is_null($userId)) {
+			$query = $query ->andWhere('t.user = :userId')
+							->setParameter(':userId', $userId);
+		}
+
+		$query = $query->getQuery();
+
+		try {
+			return $query->getArrayResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
+
+	public function getTicketCount($userId)
+	{
+		$mine = $this->getEntityManager()->createQueryBuilder();
+		$allOpen = $this->getEntityManager()->createQueryBuilder();
+		$all = $this->getEntityManager()->createQueryBuilder();
+
+		$mine = $mine   		->select('Count(t.id) as mine')
+								->from('ArcticTicketBundle:Ticket', 't')
+								->where('t.user = :userId')
+								->andWhere('t.status <> 4')
+								->setParameter(':userId', $userId)
+								->getQuery();
+
+		$allOpen = $allOpen 	->select('Count(t.id) as allOpen')
+								->from('ArcticTicketBundle:Ticket', 't')
+								->where('t.status <> 4')
+								->getQuery();
+
+		$all = $all 			->select('Count(t.id) as allIncludingClosed')
+								->from('ArcticTicketBundle:Ticket', 't')
+								->getQuery();
+
+		try {
+			return array(
+				'mine' => $mine->getSingleScalarResult(),
+				'all' => $all->getSingleScalarResult(),
+				'allOpen' => $allOpen->getSingleScalarResult()
+			);
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
 }

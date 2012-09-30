@@ -51,7 +51,7 @@ class Ticket
      * @var integer $status
      *
      * @ORM\Column(name="status", type="integer")
-     * @Assert\Choice(choices={1,2,3}, message="Choose a valid status.")
+     * @Assert\Choice(choices={1,2,3,4}, message="Choose a valid status.")
      */
     private $status;
 
