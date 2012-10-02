@@ -14,15 +14,7 @@ class AssetRepository extends EntityRepository
 {
 	public function getAssetsForListView($categoryId = null)
 	{
-		$query = $this->getEntityManager()->createQueryBuilder();
-
-		$query = $query	->select('a.id as id, a.serialnumber as serialnumber, c.name as category,
-								  o.name as name, o.description as description, t.make as make, 
-								  t.model as model')
-						->from('ArcticAssetBundle:Asset', 'a')
-						->innerJoin('ArcticAssetBundle:Owner', 'o', 'WITH', 'o.id = a.owner')
-						->innerJoin('ArcticAssetBundle:Type', 't', 'WITH', 't.id = a.type')
-						->innerJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category');
+		$query = $this->getBasicAssetQuery();
 		
 		if(!is_null($categoryId)) {
 			$query = $query ->where('t.category = :categoryId')
@@ -69,5 +61,39 @@ class AssetRepository extends EntityRepository
 		} catch (\Doctrine\ORM\NoResultException $e) {
 			return null;
 		}
+	}
+
+	public function search($input)
+	{
+		$query = $this->getBasicAssetQuery();
+
+		$query = $query ->where('a.serialnumber LIKE :input')
+						->orWhere('a.tag LIKE :input')
+						->orWhere('o.name LIKE :input')
+						->setMaxResults(10)
+						->setParameter(':input', "%{$input}%");
+
+		$query = $query->getQuery();
+
+		try {
+			return $query->getArrayResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
+
+	private function getBasicAssetQuery()
+	{
+		$query = $this->getEntityManager()->createQueryBuilder();
+
+		$query = $query	->select('a.id as id, a.serialnumber as serialnumber, c.name as category,
+								  o.name as name, o.description as description, t.make as make, 
+								  t.model as model')
+						->from('ArcticAssetBundle:Asset', 'a')
+						->innerJoin('ArcticAssetBundle:Owner', 'o', 'WITH', 'o.id = a.owner')
+						->innerJoin('ArcticAssetBundle:Type', 't', 'WITH', 't.id = a.type')
+						->innerJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category');
+
+		return $query;
 	}
 }

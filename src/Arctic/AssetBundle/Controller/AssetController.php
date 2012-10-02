@@ -3,6 +3,7 @@
 namespace Arctic\AssetBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -185,6 +186,23 @@ class AssetController extends Controller
         }
 
         return $this->redirect($this->generateUrl('ticket_show', array('id' => $ticketId)));
+    }
+
+    /**
+     * Searches for an asset
+     *
+     * @Route("/search", name="asset_search")
+     * @Method("POST")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository('ArcticAssetBundle:Asset')->search($request->request->get('query'));
+
+        $response = new Response(json_encode($result));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**
