@@ -50,6 +50,9 @@ class AssetController extends Controller
      */
     public function showAction($id)
     {
+        if (is_null($id)) {
+            return $this->redirect($this->generateUrl('asset'));
+        }
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ArcticAssetBundle:Asset')->find($id);
@@ -186,23 +189,6 @@ class AssetController extends Controller
         }
 
         return $this->redirect($this->generateUrl('ticket_show', array('id' => $ticketId)));
-    }
-
-    /**
-     * Searches for an asset
-     *
-     * @Route("/search", name="asset_search")
-     * @Method("POST")
-     * @Template()
-     */
-    public function searchAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $result = $em->getRepository('ArcticAssetBundle:Asset')->search($request->request->get('query'));
-
-        $response = new Response(json_encode($result));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
     }
 
     /**
