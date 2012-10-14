@@ -81,12 +81,21 @@ class TicketController extends Controller
     /**
      * Displays a form to create a new Ticket entity.
      *
-     * @Route("/new", name="ticket_new")
+     * @Route("/new/{assetId}", name="ticket_new", defaults = { "assetId" = null }, requirements = { "assetId" = "\d+" })
      * @Template()
      */
-    public function newAction()
+    public function newAction($assetId = null)
     {
         $entity = new Ticket();
+
+        if (!is_null($assetId)) {
+            $em = $this->getDoctrine()->getManager();
+            $asset = $em->getRepository('ArcticAssetBundle:Asset')->find($assetId);
+            if (!is_null($asset)) {
+                $entity->setAsset($asset);
+            }
+        }
+
         $form   = $this->createForm(new TicketType(), $entity);
 
         return array(

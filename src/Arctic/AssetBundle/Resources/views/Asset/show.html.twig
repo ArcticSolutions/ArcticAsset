@@ -83,6 +83,11 @@
         </tr>
         {% endfor %}
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4"><a href="{{ path('ticket_new', { 'assetId': entity.id }) }}" class="btn btn-block btn-success">New ticket</a></td>
+        </tr>
+    </tfoot>
 </table>
 
 <form action="{{ path('asset_delete', { 'id': entity.id }) }}" method="post">
