@@ -24,7 +24,7 @@ class AppKernel extends Kernel
             new Arctic\UserBundle\ArcticUserBundle(),
             new Arctic\TicketBundle\ArcticTicketBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Arctic\DashboardBundle\ArcticDashboardBundle(),
+            new Arctic\DashboardBundle\ArcticDashboardBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
