@@ -15,7 +15,7 @@ class TicketType extends AbstractType
             ->add('status', 'choice', array(
                 'choices' => array(1 => 'New', 2 => 'Active', 3 => 'Complete', 4 => 'Closed')
             ))
-            ->add('asset')
+            ->add('asset', 'text')
             ->add('user', null, array(
                 'label' => 'Assigned user'
             ))

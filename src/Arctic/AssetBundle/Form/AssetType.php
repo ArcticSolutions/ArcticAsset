@@ -16,7 +16,16 @@ class AssetType extends AbstractType
             ->add('tag')
             ->add('owner')
             ->add('type')
-        ;
+            ->add('status', 'choice', array(
+                'choices' => array(
+                    1 => 'Available',
+                    2 => 'In use',
+                    3 => 'In for repair',
+                    4 => 'Discarded'
+                ),
+                'required'    => True,
+                'empty_value' => 'Choose a status'
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

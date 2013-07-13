@@ -12,13 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class AssetRepository extends EntityRepository
 {
-	public function getAssetsForListView($categoryId = null)
+	public function getAssetsForListView($categoryId = null, $filterDiscarded = true)
 	{
 		$query = $this->getBasicAssetQuery();
 		
 		if(!is_null($categoryId)) {
 			$query = $query ->where('t.category = :categoryId')
 							->setParameter('categoryId', $categoryId);
+		}
+
+		if ($filterDiscarded) {
+			$query = $query ->andWhere('a.status <> :status')
+							->setParameter('status', 4);
 		}
 
 		$query = $query->getQuery();
@@ -30,7 +35,7 @@ class AssetRepository extends EntityRepository
 		}
 	}
 
-	public function getCountOfAssetssInCategory()
+	public function getCountOfAssetsInCategory($filterDiscarded = true)
 	{
 		$query = $this->getEntityManager()->createQueryBuilder();
 
@@ -38,8 +43,14 @@ class AssetRepository extends EntityRepository
 						->from('ArcticAssetBundle:Asset', 'a')
 						->innerJoin('ArcticAssetBundle:Type', 't', 'WITH', 't.id = a.type')
 						->leftJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category')
-						->groupBy('t.category')
-						->getQuery();
+						->groupBy('t.category');
+
+		if ($filterDiscarded) {
+			$query = $query ->where('a.status <> :status')
+							->setParameter('status', 4);
+		}
+
+		$query = $query->getQuery();
 
 		try {
 			return $query->getArrayResult();
@@ -48,13 +59,19 @@ class AssetRepository extends EntityRepository
 		}
 	}
 
-	public function getCountOfAssets()
+	public function getCountOfAssets($filterDiscarded = true)
 	{
 		$query = $this->getEntityManager()->createQueryBuilder();
 
 		$query = $query ->select('count(a.id) as amount')
-						->from('ArcticAssetBundle:Asset', 'a')
-						->getQuery();
+						->from('ArcticAssetBundle:Asset', 'a');
+
+		if ($filterDiscarded) {
+			$query = $query ->where('a.status <> :status')
+							->setParameter('status', 4);
+		}
+
+		$query = $query->getQuery();
 
 		try {
 			return $query->getSingleScalarResult();
@@ -88,11 +105,11 @@ class AssetRepository extends EntityRepository
 
 		$query = $query	->select('a.id as id, a.serialnumber as serialnumber, c.name as category,
 								  o.name as name, o.description as description, t.make as make, 
-								  t.model as model')
+								  t.model as model, a.status as status')
 						->from('ArcticAssetBundle:Asset', 'a')
-						->innerJoin('ArcticAssetBundle:Owner', 'o', 'WITH', 'o.id = a.owner')
+						->leftJoin('ArcticAssetBundle:Owner', 'o', 'WITH', 'o.id = a.owner')
 						->innerJoin('ArcticAssetBundle:Type', 't', 'WITH', 't.id = a.type')
-						->innerJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category');
+						->leftJoin('ArcticAssetBundle:Category', 'c', 'WITH', 'c.id = t.category');
 
 		return $query;
 	}

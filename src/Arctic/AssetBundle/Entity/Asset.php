@@ -44,8 +44,7 @@ class Asset
     /**
      * @var string $serialnumber
      *
-     * @ORM\Column(name="serialnumber", type="string", length=255, unique=true)
-     * @Assert\NotBlank
+     * @ORM\Column(name="serialnumber", type="string", length=255, nullable=true)
      */
     private $serialnumber;
 
@@ -62,6 +61,13 @@ class Asset
      * @ORM\Column(name="tag", type="string", length=255, nullable=true)
      */
     private $tag;
+
+    /**
+     * @var string $status
+     *
+     * @ORM\Column(name="status", type="integer", length=11, nullable=false)
+     */
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="Owner", inversedBy="assets")
@@ -82,7 +88,10 @@ class Asset
 
     public function __toString()
     {
-        return sprintf('%s (%s)', $this->owner->getName(), $this->serialnumber);
+        if (isset($this->owner)) {
+            return sprintf('%s (%s)', $this->owner->getName(), $this->serialnumber);
+        }
+        return sprintf('%s', $this->serialnumber);
     }
 
     /**
@@ -282,5 +291,28 @@ class Asset
     public function getTag()
     {
         return $this->tag;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Asset
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

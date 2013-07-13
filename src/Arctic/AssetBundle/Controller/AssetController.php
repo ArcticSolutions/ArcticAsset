@@ -29,9 +29,9 @@ class AssetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $assets = $em->getRepository('ArcticAssetBundle:Asset')->getAssetsForListView($categoryId);
-        $assetsByCategory = $em->getRepository('ArcticAssetBundle:Asset')->getCountOfAssetssInCategory();
-        $assetsTotal = $em->getRepository('ArcticAssetBundle:Asset')->getCountOfAssets();
+        $assets = $em->getRepository('ArcticAssetBundle:Asset')->getAssetsForListView($categoryId, true);
+        $assetsByCategory = $em->getRepository('ArcticAssetBundle:Asset')->getCountOfAssetsInCategory(true);
+        $assetsTotal = $em->getRepository('ArcticAssetBundle:Asset')->getCountOfAssets(true);
 
         return array(
             'title'                 => 'Assets',
