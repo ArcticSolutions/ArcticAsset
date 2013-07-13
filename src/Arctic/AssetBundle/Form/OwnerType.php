@@ -12,7 +12,11 @@ class OwnerType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('username')
             ->add('description')
+            ->add('office')
+            ->add('phonenumber')
+            ->add('email')
         ;
     }
 

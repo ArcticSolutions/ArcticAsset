@@ -49,11 +49,39 @@ class Owner
     private $name;
 
     /**
+     * @var string $username
+     *
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    private $username;
+
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var text $office
+     *
+     * @ORM\Column(name="office", type="string", length=255, nullable=true)
+     */
+    private $office;
+
+    /**
+     * @var text $phonenumber
+     *
+     * @ORM\Column(name="phonenumber", type="integer", length=255, nullable=true)
+     */
+    private $phonenumber;
+
+    /**
+     * @var text $email
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
 
     /**
      * @ORM\OneToMany(targetEntity="Asset", mappedBy="owner")
@@ -197,5 +225,97 @@ class Owner
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return Owner
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set office
+     *
+     * @param string $office
+     * @return Owner
+     */
+    public function setOffice($office)
+    {
+        $this->office = $office;
+    
+        return $this;
+    }
+
+    /**
+     * Get office
+     *
+     * @return string 
+     */
+    public function getOffice()
+    {
+        return $this->office;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Owner
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set phonenumber
+     *
+     * @param integer $phonenumber
+     * @return Owner
+     */
+    public function setPhonenumber($phonenumber)
+    {
+        $this->phonenumber = $phonenumber;
+    
+        return $this;
+    }
+
+    /**
+     * Get phonenumber
+     *
+     * @return integer 
+     */
+    public function getPhonenumber()
+    {
+        return $this->phonenumber;
     }
 }

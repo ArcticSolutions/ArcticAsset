@@ -82,6 +82,12 @@ class Asset
     private $type;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="assets")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     */
+    private $location;
+
+    /**
      * @ORM\OneToMany(targetEntity="Arctic\TicketBundle\Entity\Ticket", mappedBy="asset")
      */
     private $tickets;
